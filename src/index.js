@@ -2,12 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css'; // for Bootstrap styles
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';// for routing
+import { AuthProvider } from './Authprovider/AuthContext';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+    </BrowserRouter>
+      
+
   </React.StrictMode>
 );
 
