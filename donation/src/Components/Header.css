@@ -1,0 +1,10 @@
+
+.textcolor {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.textcolor:hover {
+    color: #000000;
+}   
