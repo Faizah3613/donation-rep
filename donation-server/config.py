@@ -7,7 +7,7 @@ def create_app():
     CORS(app)
 
     # MongoDB connection
-    client = MongoClient("mongodb+srv://Arman123:CwATyLPn8tm3OA2D@cluster0.dbm2bbe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    client = MongoClient("mongodb+srv://faizaharjumand2002_db_user:AYYBRcXBEdg4XNBO@cluster0.egx14ay.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
     db = client["donation_db"]
 
     # Attach db to app

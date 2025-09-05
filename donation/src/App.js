@@ -10,6 +10,7 @@ import Homepage from './pages/Homepage'
 import Register from './pages/Register';
 import Login from './pages/Login';
 import PrivateRoute from './Route/PrivateRoute';
+import AdminWithdrawRequests from './pages/AdminWithdrawRequests';
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path="/donate/:id" element={<Donation />} />
                     <Route path="/leaderboard" element={<DonorLeaderboard />} />
                     <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+                    <Route path="/withdraw_req" element={<PrivateRoute><AdminWithdrawRequests /></PrivateRoute>} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </div>

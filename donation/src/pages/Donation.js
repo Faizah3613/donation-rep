@@ -6,45 +6,45 @@ const Donation = () => {
     const [customAmount, setCustomAmount] = useState('');
     const [donorName, setDonorName] = useState('');
     const [donorEmail, setDonorEmail] = useState('');
+    const [accountNumber, setAccountNumber] = useState('');
+    const [transactionId, setTransactionId] = useState('');
     const [isAnonymous, setIsAnonymous] = useState(false);
-    
+
     const location = useLocation();
     const selectedEvent = location?.state?.event;
-    
 
-    if (!selectedEvent) {
-        return <div>Event data not found. Please go back and try again.</div>;
-    }
     if (!selectedEvent) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <p className="text-gray-500 text-lg">No campaign selected. Please go back and choose one.</p>
+                <p className="text-gray-500 text-lg">
+                    No campaign selected. Please go back and choose one.
+                </p>
             </div>
         );
     }
+
     const onBack = () => {
         window.history.back();
     };
 
     const onDonationComplete = (donation) => {
-        // Here you would typically send the donation to your backend or handle it accordingly
         console.log("Donation completed:", donation);
-        //here start code to insert donation into database
+
         fetch("http://localhost:8000/add_donation", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(donation),
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Donation saved:", data);
-        })
-        .catch(error => {
-            console.error("Error saving donation:", error);
-        });
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Donation saved:", data);
+            })
+            .catch((error) => {
+                console.error("Error saving donation:", error);
+            });
 
         alert(`Thank you for your donation of $${donation.amount} to ${selectedEvent.title}!`);
-        onBack(); // Navigate back after donation
+        onBack();
     };
 
     const presetAmounts = [25, 50, 100, 250, 500];
@@ -64,14 +64,14 @@ const Donation = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         if (donationAmount <= 0) {
             alert('Please select a donation amount.');
             return;
         }
 
-        if (!donorName || !donorEmail) {
-            alert('Please fill in your name and email.');
+        if (!donorName || !donorEmail || !accountNumber || !transactionId) {
+            alert('Please fill in all required fields.');
             return;
         }
 
@@ -79,12 +79,12 @@ const Donation = () => {
             name: isAnonymous ? 'Anonymous' : donorName.trim(),
             amount: donationAmount,
             email: donorEmail.trim(),
+            account_number: accountNumber.trim(),
+            transaction_id: transactionId.trim(),
             date: new Date().toISOString(),
             campaignId: selectedEvent._id,
             campaignTitle: selectedEvent.title,
         };
-        
-
 
         onDonationComplete(donation);
     };
@@ -93,7 +93,7 @@ const Donation = () => {
         <div className="min-h-screen bg-gray-50 py-8">
             <div className="container mx-auto px-6">
                 <div className="max-w-4xl mx-auto">
-                    <button 
+                    <button
                         onClick={onBack}
                         className="mb-6 flex items-center text-purple-600 hover:text-purple-700"
                     >
@@ -112,7 +112,7 @@ const Donation = () => {
                                 <div>
                                     <h3 className="text-xl font-semibold mb-4">Choose Amount</h3>
                                     <div className="grid grid-cols-2 gap-3 mb-4">
-                                        {presetAmounts.map(amount => (
+                                        {presetAmounts.map((amount) => (
                                             <button
                                                 key={amount}
                                                 type="button"
@@ -127,7 +127,7 @@ const Donation = () => {
                                             </button>
                                         ))}
                                     </div>
-                                    
+
                                     <div>
                                         <label className="block text-sm font-medium mb-2">Custom Amount</label>
                                         <div className="relative">
@@ -172,6 +172,31 @@ const Donation = () => {
                                                 value={donorEmail}
                                                 onChange={(e) => setDonorEmail(e.target.value)}
                                                 placeholder="Enter your email"
+                                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                                required
+                                            />
+                                        </div>
+
+                                        {/* New fields for Transaction Verification */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">Account Number</label>
+                                            <input
+                                                type="text"
+                                                value={accountNumber}
+                                                onChange={(e) => setAccountNumber(e.target.value)}
+                                                placeholder="Enter account number"
+                                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                                required
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">Transaction ID</label>
+                                            <input
+                                                type="text"
+                                                value={transactionId}
+                                                onChange={(e) => setTransactionId(e.target.value)}
+                                                placeholder="Enter transaction ID"
                                                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                                 required
                                             />

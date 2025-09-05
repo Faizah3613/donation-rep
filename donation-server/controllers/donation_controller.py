@@ -23,8 +23,14 @@ class DonationController:
             'email': data.get('email'),
             'amount': data.get('amount'),
             'campaign': data.get('campaign'),
-            'date': data.get('date')
+            'date': data.get('date'),
+            'name': data.get('name'),
+            'account_number': data.get('account_number'),
+            'transaction_id': data.get('transaction_id'),
         }
+
+        # Remove None values (so only provided fields get updated)
+        updated_fields = {k: v for k, v in updated_fields.items() if v is not None}
 
         result = self.model.update(donation_id, updated_fields)
         if result.modified_count == 1:

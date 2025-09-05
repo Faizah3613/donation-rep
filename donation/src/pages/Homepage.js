@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router";
 import DonationCard from "./DonationCard";
+import WithdrawForm from "./WithdrawForm";
 
 const Homepage = () => {
     const navigate = useNavigate();
@@ -184,6 +185,8 @@ const Homepage = () => {
                 </div>
             </section>
 
+
+
             {/* Testimonials */}
             <section className="py-16 bg-gray-50">
                 <div className="container mx-auto px-6">
@@ -242,6 +245,12 @@ const Homepage = () => {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            <section>
+                <div className="container mx-auto px-6 mb-16">
+                    <WithdrawForm></WithdrawForm>
                 </div>
             </section>
 

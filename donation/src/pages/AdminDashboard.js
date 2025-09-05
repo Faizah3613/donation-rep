@@ -1,6 +1,7 @@
 // === AdminDashboard.jsx ===
 import { useEffect, useState } from "react";
 import EditDonationList from "./EditDonationList";
+import { Link } from "react-router";
 
 const AdminDashboard = () => {
     const [showForm, setShowForm] = useState(false);
@@ -85,6 +86,7 @@ const AdminDashboard = () => {
         <div className="min-h-screen bg-gray-100 p-6">
             <div className="flex justify-between mb-6">
                 <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+                <Link to="/withdraw_req"> withdraw request</Link>
                 <button className="bg-purple-600 text-white px-4 py-2 rounded" onClick={() => setShowForm(true)}>+ Create Campaign</button>
             </div>
 

@@ -18,3 +18,20 @@ class DonationModel:
 
     def delete(self, donation_id):
         return self.collection.delete_one({"_id": ObjectId(donation_id)})
+    
+    def find_by_all(self, email, transaction_id, account_number, amount):
+        return self.collection.find_one({
+            "email": email,
+            "transaction_id": transaction_id,
+            "account_number": account_number,
+            "amount": amount
+        })
+
+    def delete_by_all(self, email, transaction_id, account_number, amount):
+        return self.collection.delete_one({
+            "email": email,
+            "transaction_id": transaction_id,
+            "account_number": account_number,
+            "amount": amount
+        })
+

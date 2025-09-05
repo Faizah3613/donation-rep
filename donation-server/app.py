@@ -134,12 +134,15 @@
 from config import create_app
 from routes.campaign_routes import init_campaign_routes
 from routes.donation_routes import init_donation_routes
+from routes.withdraw_routes import init_withdraw_routes   # << add this
 
 app = create_app()
 
 # Initialize routes with db
 init_campaign_routes(app, app.db)
 init_donation_routes(app, app.db)
+init_withdraw_routes(app, app.db)   # << ensure withdraw routes are initialized
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8000, debug=True)
+

@@ -16,7 +16,9 @@ def init_donation_routes(app, db):
 
     @donation_bp.route('/edit_donation/<donation_id>', methods=['PUT'])
     def edit_donation(donation_id):
-        return jsonify(controller.edit_donation(donation_id, request.json))
+        data = request.get_json(force=True)  # ✅ ensures JSON is parsed
+        return jsonify(controller.edit_donation(donation_id, data))
+
 
     @donation_bp.route('/add_donation', methods=['POST'])
     def add_donation():
