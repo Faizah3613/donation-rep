@@ -7,11 +7,6 @@
 # app = Flask(__name__)
 # CORS(app)
 
-# client = MongoClient("mongodb+srv://Arman123:CwATyLPn8tm3OA2D@cluster0.dbm2bbe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-# db = client["donation_db"]
-# donations_collection = db["donations"]
-# campaigns_collection = db["campaigns"]
-
 # def convert_objectid(data):
 #     for item in data:
 #         item["_id"] = str(item["_id"])
