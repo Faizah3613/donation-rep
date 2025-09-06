@@ -5,7 +5,7 @@ import { useAuth } from "../Authprovider/AuthContext";
 
 
 const Register = ( ) => {
-    const { registerUser } = useAuth; // 👈 Use context
+    const { registerUser } = useAuth(); // 👈 Use context
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
